@@ -66,17 +66,20 @@ function Header() {
 }
 
 function Menu() {
+  const pizzaLength = pizzaData.length;
   return (
     <main className="menu">
       <h2>Our Menu:</h2>
-      {/* <Pizza pizza={pizzaData[0]} />
-      <Pizza pizza={pizzaData[1]} />
-      <Pizza pizza={pizzaData[2]} /> */}
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizza={pizza} />
-        ))}
-      </ul>
+
+      {pizzaLength > 0 ? (
+        <ul className="pizzas">
+          {pizzaData.map((pizza) => (
+            <Pizza pizza={pizza} />
+          ))}
+        </ul>
+      ) : (
+        <p>Sorry, no pizzas available</p>
+      )}
     </main>
   );
 }
@@ -84,7 +87,7 @@ function Menu() {
 function Footer() {
   const hour = new Date().getHours();
   const openHour = 12;
-  const closedHour = 22;
+  const closedHour = 23;
   const isOpen = hour >= openHour && hour < closedHour;
   //   return <footer className="footer">© 2021 Fast React Pizza Co.</footer>;
   return (
