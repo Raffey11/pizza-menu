@@ -92,15 +92,17 @@ function Footer() {
   //   return <footer className="footer">© 2021 Fast React Pizza Co.</footer>;
   return (
     <footer className="footer">
-      <div className="order">
-        {isOpen ? (
-          <p>We are open until {closedHour}:00. Come visit us or order </p>
-        ) : (
-          <p>Sorry, we are closed</p>
-        )}
-        <button className="btn">Order</button>
-      </div>
+      {isOpen ? <Order closedHour={closedHour} /> : <p>Sorry, we are closed</p>}
     </footer>
+  );
+}
+
+function Order(props) {
+  return (
+    <div className="order">
+      <p>We are open until {props.closedHour}:00. Come visit us or order </p>
+      <button className="btn">Order</button>
+    </div>
   );
 }
 
