@@ -72,11 +72,17 @@ function Menu() {
       <h2>Our Menu:</h2>
 
       {pizzaLength > 0 ? (
-        <ul className="pizzas">
-          {pizzaData.map((pizza) => (
-            <Pizza pizza={pizza} />
-          ))}
-        </ul>
+        <>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious
+          </p>
+          <ul className="pizzas">
+            {pizzaData.map((pizza) => (
+              <Pizza pizza={pizza} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>Sorry, no pizzas available</p>
       )}
@@ -89,7 +95,6 @@ function Footer() {
   const openHour = 12;
   const closedHour = 23;
   const isOpen = hour >= openHour && hour < closedHour;
-  //   return <footer className="footer">© 2021 Fast React Pizza Co.</footer>;
   return (
     <footer className="footer">
       {isOpen ? <Order closedHour={closedHour} /> : <p>Sorry, we are closed</p>}
@@ -108,12 +113,14 @@ function Order(props) {
 
 function Pizza(props) {
   return (
-    <li className="pizza">
+    <li className={`pizza ${props.pizza.soldOut ? "sold-out" : ""}`}>
       <img src={props.pizza.photoName} alt={props.pizza.name} />
       <div>
         <h3>{props.pizza.name}</h3>
         <p>{props.pizza.ingredients}</p>
-        <span>{props.pizza.price}</span>
+        <span>
+          {props.pizza.soldOut ? "SOLD OUT" : "€" + props.pizza.price}
+        </span>
       </div>
     </li>
   );
